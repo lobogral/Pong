@@ -8,30 +8,22 @@ public class Pelota {
     private int velY;
     private final int diametro;
 
-    public Pelota() {
-        posX = Pong.ANCHO /2;
-        posY = Pong.ALTO /2;
-        velX = 2;
-        velY = -2;
-        diametro = 20;
+    public Pelota(int posX, int posY) {
+        this.posX = posX;
+        this.posY = posY;
+        this.velX = 2;
+        this.velY = -2;
+        this.diametro = 20;
     }
     
     public void dibujar(Graphics lapiz){
-        lapiz.setColor(Color.CYAN);
+        lapiz.setColor(Color.WHITE);
         lapiz.fillOval(posX, posY, diametro, diametro);
     }
     
     public void actualizar(){
-        posX = posX + velX;
-        posY = posY + velY;
-
-        if (posX <= 0 || posX >= Pong.ANCHO - 40) {
-            velX = -velX;
-        }
-
-        if (posY <= 100 || posY >= Pong.ALTO - 40) {
-            velY = -velY;
-        }
+        posX += velX;
+        posY += velY;
     }
     
     public int getPosX(){
@@ -43,9 +35,12 @@ public class Pelota {
     public void invertirVelX(){
         velX = -velX;
     }
-    public void setInicial(){
-        posX = Pong.ANCHO/2;
-        posY = Pong.ALTO/2;
+    public void invertirVelY(){
+        velY = -velY;
+    }
+    public void setPosXY(int posX, int posY){
+        this.posX = posX;
+        this.posY = posY;
     }
     public int getDiametro(){
         return diametro;

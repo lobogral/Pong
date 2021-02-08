@@ -1,19 +1,19 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 
-public class Pong extends JFrame implements KeyListener {
+public class Pong extends KeyAdapter {
 
-    public static final int ANCHO = 800;
-    public static final int ALTO = 600;
+    private static final int ANCHO = 800;
+    private static final int ALTO = 600;
     private final Pelota pelota;
-    private final Paleta paletaIzquierda;
-    private final Paleta paletaDerecha;
-    private final Puntuacion puntuacion;
+    private final Jugador jugadorIzquierdo;
+    private final Jugador jugadorDerecho;
+    private final JFrame escenario;
 
 
     public static void main(String[] args) {
@@ -21,78 +21,101 @@ public class Pong extends JFrame implements KeyListener {
     }
 
     public Pong() {
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(ANCHO, ALTO);
-        this.setResizable(false);
-        this.setLocation(100, 100);
-        this.setVisible(true);
-        this.createBufferStrategy(2);
-        this.addKeyListener(this);
+        escenario = new JFrame();
+        escenario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        escenario.setSize(ANCHO, ALTO);
+        escenario.setResizable(false);
+        escenario.setLocation(100, 100);
+        escenario.setVisible(true);
+        escenario.setTitle("Pong");
+        escenario.createBufferStrategy(2);
+        escenario.addKeyListener(this);
 
-        pelota = new Pelota();
-        paletaIzquierda = new Paleta(70);
-        paletaDerecha = new Paleta(700);
-        puntuacion = new Puntuacion();
+        pelota = new Pelota(ANCHO/2, ALTO/2);
+        jugadorIzquierdo = new Jugador(70, ALTO/2);
+        jugadorDerecho = new Jugador(720, ALTO/2);
 
         while (true) {
-            this.compararPelotaPaletas();
-            this.actualizar();
+            this.colisiones();
             this.dibujar();
             this.dormir();
         }
 
     }
 
-    private void actualizar() {
-        pelota.actualizar();
+    private void colisiones() {
+        colisionPelotaJugador(jugadorIzquierdo);
+        colisionPelotaJugador(jugadorDerecho);
+        colisionPelotaEscenario();
+        colisionJugadorEscenario(jugadorIzquierdo);
+        colisionJugadorEscenario(jugadorDerecho);
     }
 
-    private void compararPelotaPaletas() {
-
-        //Colision pelota-paletaIzquierda
-        boolean valor1 = pelota.getPosX() + pelota.getDiametro() > paletaIzquierda.getPosX();
-        boolean valor2 = pelota.getPosX() < paletaIzquierda.getPosX() + paletaIzquierda.getAncho();
-        boolean valor3 = pelota.getPosY() + pelota.getDiametro() > paletaIzquierda.getPosY();
-        boolean valor4 = pelota.getPosY() < paletaIzquierda.getPosY() + paletaIzquierda.getAlto();
-
-        if (valor1 && valor2 && valor3 && valor4) {
-            pelota.invertirVelX();
-        }         
-        
+    private void colisionPelotaEscenario(){
         if (pelota.getPosX() <= 0) {
-            puntuacion.aumentarBuenas();
-            pelota.setInicial();
-        }
-
-        //Colisión pelota-paletaDerecha
-        valor1 = pelota.getPosX() + pelota.getDiametro() > paletaDerecha.getPosX();
-        valor2 = pelota.getPosX() < paletaDerecha.getPosX() + paletaDerecha.getAncho();
-        valor3 = pelota.getPosY() + pelota.getDiametro() > paletaDerecha.getPosY();
-        valor4 = pelota.getPosY() < paletaDerecha.getPosY() + paletaDerecha.getAlto();
-        
-        if (valor1 && valor2 && valor3 && valor4) {
-            pelota.invertirVelX();
+            jugadorDerecho.aumentarPuntaje();
+            pelota.setPosXY(ANCHO/2, ALTO/2);
         }
       
         if (pelota.getPosX() >= ANCHO - 40) {
-            puntuacion.aumentarMalas();
-            pelota.setInicial();
+            jugadorIzquierdo.aumentarPuntaje();
+            pelota.setPosXY(ANCHO/2, ALTO/2);
         }
         
+        if (pelota.getPosY() <= 100 || pelota.getPosY() >= Pong.ALTO - 40) {
+            pelota.invertirVelY();
+        }
+        
+        pelota.actualizar();
+        
+    }
+    
+    private void colisionPelotaJugador(Jugador jugador){
+        
+        boolean valor1, valor2, valor3, valor4;
+        valor1 = pelota.getPosX() + pelota.getDiametro() > jugador.getPosX();
+        valor2 = pelota.getPosX() < jugador.getPosX() + jugador.getAncho();
+        valor3 = pelota.getPosY() + pelota.getDiametro() > jugador.getPosY();
+        valor4 = pelota.getPosY() < jugador.getPosY() + jugador.getAlto();
+        
+        if (valor1 && valor2 && valor3 && valor4) {
+            pelota.invertirVelX();
+            pelota.invertirVelY();
+            /*
+             * Doble actualizar permite que la pelota
+             * No se pegue a la paleta del jugador
+            */
+            pelota.actualizar();
+            pelota.actualizar();
+        }
+
     }
 
+    private void colisionJugadorEscenario(Jugador jugador){
+
+        if (jugador.getPosY() > 100 && jugador.getVelPositiva()) {
+            jugador.actualizar();
+        }
+        
+        if (jugador.getPosY() < ALTO - 100 && !jugador.getVelPositiva()) {
+            jugador.actualizar();
+        }
+
+    }
+    
     private void dibujar() {
         
-        BufferStrategy buffer = this.getBufferStrategy();
+        BufferStrategy buffer = escenario.getBufferStrategy();
         Graphics lapiz = buffer.getDrawGraphics();
 
-        lapiz.setColor(Color.GRAY);
+        lapiz.setColor(Color.BLACK);
         lapiz.fillRect(0, 0, ANCHO, ALTO);
-
+        lapiz.setColor(Color.WHITE);
+        lapiz.drawLine(0, 80, Pong.ANCHO, 80);
+        
         pelota.dibujar(lapiz);
-        paletaIzquierda.dibujar(lapiz);
-        paletaDerecha.dibujar(lapiz);
-        puntuacion.dibujar(lapiz);
+        jugadorIzquierdo.dibujar(lapiz);
+        jugadorDerecho.dibujar(lapiz);
 
         lapiz.dispose();
         buffer.show();
@@ -113,23 +136,14 @@ public class Pong extends JFrame implements KeyListener {
         int key = e.getKeyCode();
         switch (key) {
             case KeyEvent.VK_UP -> {
-                paletaIzquierda.subir();
-                paletaDerecha.subir();
+                jugadorIzquierdo.subir();
+                jugadorDerecho.subir();
             }
             case KeyEvent.VK_DOWN -> {
-                paletaIzquierda.bajar();
-                paletaDerecha.bajar();
+                jugadorIzquierdo.bajar();
+                jugadorDerecho.bajar();
             }
         }
     }
 
-    @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
 }
