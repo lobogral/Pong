@@ -11,7 +11,8 @@ public class Pong extends JFrame implements KeyListener {
     public static final int ANCHO = 800;
     public static final int ALTO = 600;
     private final Pelota pelota;
-    private final Paletas paletas;
+    private final Paleta paletaIzquierda;
+    private final Paleta paletaDerecha;
     private final Puntuacion puntuacion;
 
 
@@ -29,11 +30,12 @@ public class Pong extends JFrame implements KeyListener {
         this.addKeyListener(this);
 
         pelota = new Pelota();
-        paletas = new Paletas();
+        paletaIzquierda = new Paleta(70);
+        paletaDerecha = new Paleta(700);
         puntuacion = new Puntuacion();
 
         while (true) {
-            this.comparar();
+            this.compararPelotaPaletas();
             this.actualizar();
             this.dibujar();
             this.dormir();
@@ -42,38 +44,45 @@ public class Pong extends JFrame implements KeyListener {
     }
 
     private void actualizar() {
-        paletas.actualizar();
         pelota.actualizar();
     }
 
-    private void comparar() {
-        boolean valor1 = pelota.getX() < 75 && pelota.getX() > 60;
-        boolean valor2 = pelota.getY() > paletas.getY();
-        boolean valor3 = pelota.getY() < paletas.getY() + paletas.getAlto();
-        if (valor1 && valor2 && valor3) {
-            if (pelota.getVeloX() < 0) {
-                puntuacion.aumentarBuenas();
-            }
-            pelota.cambiarDireccion();
+    private void compararPelotaPaletas() {
+
+        //Colision pelota-paletaIzquierda
+        boolean valor1 = pelota.getPosX() + pelota.getDiametro() > paletaIzquierda.getPosX();
+        boolean valor2 = pelota.getPosX() < paletaIzquierda.getPosX() + paletaIzquierda.getAncho();
+        boolean valor3 = pelota.getPosY() + pelota.getDiametro() > paletaIzquierda.getPosY();
+        boolean valor4 = pelota.getPosY() < paletaIzquierda.getPosY() + paletaIzquierda.getAlto();
+
+        if (valor1 && valor2 && valor3 && valor4) {
+            pelota.invertirVelX();
+        }         
+        
+        if (pelota.getPosX() <= 0) {
+            puntuacion.aumentarBuenas();
+            pelota.setInicial();
         }
 
-        boolean valor4 = pelota.getX() > 695 && pelota.getX() < 710;
-        boolean valor5 = pelota.getY() > paletas.getY();
-        boolean valor6 = pelota.getY() < paletas.getY() + paletas.getAlto();
-        if (valor4 && valor5 && valor6) {
-            if (pelota.getVeloX() > 0) {
-                puntuacion.aumentarBuenas();
-            }
-            pelota.cambiarDireccion();
+        //Colisión pelota-paletaDerecha
+        valor1 = pelota.getPosX() + pelota.getDiametro() > paletaDerecha.getPosX();
+        valor2 = pelota.getPosX() < paletaDerecha.getPosX() + paletaDerecha.getAncho();
+        valor3 = pelota.getPosY() + pelota.getDiametro() > paletaDerecha.getPosY();
+        valor4 = pelota.getPosY() < paletaDerecha.getPosY() + paletaDerecha.getAlto();
+        
+        if (valor1 && valor2 && valor3 && valor4) {
+            pelota.invertirVelX();
+        }
+      
+        if (pelota.getPosX() >= ANCHO - 40) {
+            puntuacion.aumentarMalas();
+            pelota.setInicial();
         }
         
-        if (pelota.getX() <= 0 || pelota.getX() >= ANCHO - 40) {
-            puntuacion.aumentarMalas();
-        }
     }
 
     private void dibujar() {
-
+        
         BufferStrategy buffer = this.getBufferStrategy();
         Graphics lapiz = buffer.getDrawGraphics();
 
@@ -81,7 +90,8 @@ public class Pong extends JFrame implements KeyListener {
         lapiz.fillRect(0, 0, ANCHO, ALTO);
 
         pelota.dibujar(lapiz);
-        paletas.dibujar(lapiz);
+        paletaIzquierda.dibujar(lapiz);
+        paletaDerecha.dibujar(lapiz);
         puntuacion.dibujar(lapiz);
 
         lapiz.dispose();
@@ -102,12 +112,14 @@ public class Pong extends JFrame implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
         switch (key) {
-            case KeyEvent.VK_UP:
-                paletas.cambiarDireccion();
-                break;
-            case KeyEvent.VK_DOWN:
-                System.exit(0);
-                break;
+            case KeyEvent.VK_UP -> {
+                paletaIzquierda.subir();
+                paletaDerecha.subir();
+            }
+            case KeyEvent.VK_DOWN -> {
+                paletaIzquierda.bajar();
+                paletaDerecha.bajar();
+            }
         }
     }
 

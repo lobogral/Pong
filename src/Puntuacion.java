@@ -3,8 +3,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 public class Puntuacion {
-    private int Buenas;
-    private int Malas;
+    private int puntuacionPaletaDerecha;
+    private int puntuacionPaletaIzquierda;
     
     public void dibujar(Graphics lapiz){
         lapiz.setColor(Color.BLUE);
@@ -14,17 +14,17 @@ public class Puntuacion {
         
         lapiz.setColor(Color.WHITE);
         lapiz.setFont(new Font("Arial", Font.BOLD, 16));
-        lapiz.drawString("Buenas: " + Buenas, 20, 50);
+        lapiz.drawString("Paleta derecha: " + puntuacionPaletaDerecha, 20, 50);
 
         lapiz.setColor(Color.WHITE);
         lapiz.setFont(new Font("Arial", Font.BOLD, 16));
-        lapiz.drawString("Malas: " + Malas, 20, 70);
+        lapiz.drawString("Paleta izquierda: " + puntuacionPaletaIzquierda, 20, 70);
     }
     
     public void aumentarBuenas(){
-        Buenas++;
+        puntuacionPaletaDerecha++;
     }
     public void aumentarMalas(){
-        Malas++;
+        puntuacionPaletaIzquierda++;
     }
 }

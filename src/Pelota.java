@@ -2,46 +2,53 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Pelota {
-    private int x;
-    private int y;
-    private int veloX;
-    private int veloY;
+    private int posX;
+    private int posY;
+    private int velX;
+    private int velY;
+    private final int diametro;
 
     public Pelota() {
-        x = Pong.ANCHO /2;
-        y = Pong.ALTO /2;
-        veloX = 5;
-        veloY = -5;
+        posX = Pong.ANCHO /2;
+        posY = Pong.ALTO /2;
+        velX = 2;
+        velY = -2;
+        diametro = 20;
     }
     
     public void dibujar(Graphics lapiz){
         lapiz.setColor(Color.CYAN);
-        lapiz.fillOval(x, y, 20, 20);
+        lapiz.fillOval(posX, posY, diametro, diametro);
     }
     
     public void actualizar(){
-        x = x + veloX;
-        y = y + veloY;
+        posX = posX + velX;
+        posY = posY + velY;
 
-        if (x <= 0 || x >= Pong.ANCHO - 40) {
-            veloX = -veloX;
+        if (posX <= 0 || posX >= Pong.ANCHO - 40) {
+            velX = -velX;
         }
 
-        if (y <= 100 || y >= Pong.ALTO - 40) {
-            veloY = -veloY;
+        if (posY <= 100 || posY >= Pong.ALTO - 40) {
+            velY = -velY;
         }
     }
     
-    public int getX(){
-        return x;
+    public int getPosX(){
+        return posX;
     }
-    public int getY(){
-        return y;
+    public int getPosY(){
+        return posY;
     }
-    public int getVeloX(){
-        return veloX;
+    public void invertirVelX(){
+        velX = -velX;
     }
-    public void cambiarDireccion(){
-        veloX = -veloX;
+    public void setInicial(){
+        posX = Pong.ANCHO/2;
+        posY = Pong.ALTO/2;
     }
+    public int getDiametro(){
+        return diametro;
+    }
+
 }
