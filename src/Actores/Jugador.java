@@ -7,7 +7,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class ActJugador extends KeyAdapter implements Actor{
+public class Jugador extends KeyAdapter implements Actor{
     
     private int velY;
     private final int posX;
@@ -16,7 +16,7 @@ public class ActJugador extends KeyAdapter implements Actor{
     private final int ancho;
     private int puntaje;
     
-    public ActJugador(int posX, int posY) {
+    public Jugador(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
         this.alto = 80;

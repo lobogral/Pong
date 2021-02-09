@@ -4,14 +4,14 @@ import Principal.Actor;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class ActPelota implements Actor {
+public class Pelota implements Actor {
     private int posX;
     private int posY;
     private int velX;
     private int velY;
     private final int diametro;
 
-    public ActPelota(int posX, int posY) {
+    public Pelota(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
         this.velX = 2;

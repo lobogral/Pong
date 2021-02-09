@@ -1,14 +1,14 @@
 package Interacciones;
 import Principal.Interaccion;
-import Actores.ActJugador;
-import Actores.ActPelota;
+import Actores.Jugador;
+import Actores.Pelota;
 
 public class IntePelotaJugador implements Interaccion{
     
-    private final ActPelota pelota;
-    private final ActJugador jugador;
+    private final Pelota pelota;
+    private final Jugador jugador;
     
-    public IntePelotaJugador(ActPelota pelota, ActJugador jugador){
+    public IntePelotaJugador(Pelota pelota, Jugador jugador){
         this.pelota = pelota;
         this.jugador = jugador;
     }

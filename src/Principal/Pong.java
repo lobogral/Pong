@@ -1,8 +1,8 @@
 package Principal;
 
-import Actores.ActEscenario;
-import Actores.ActPelota;
-import Actores.ActJugador;
+import Actores.Escenario;
+import Actores.Pelota;
+import Actores.Jugador;
 import Interacciones.InteJugadorEscenario;
 import Interacciones.IntePelotaEscenario;
 import Interacciones.IntePuntaje;
@@ -34,10 +34,10 @@ public class Pong extends JFrame {
         this.setTitle("Pong");
         this.createBufferStrategy(2);
 
-        ActPelota pelota = new ActPelota(ANCHO/2, ALTO/2);
-        ActJugador jugador1 = new ActJugador(70, ALTO/2);
-        ActJugador jugador2 = new ActJugador(720, ALTO/2);
-        ActEscenario escenario = new ActEscenario(ANCHO, ALTO);
+        Pelota pelota = new Pelota(ANCHO/2, ALTO/2);
+        Jugador jugador1 = new Jugador(70, ALTO/2);
+        Jugador jugador2 = new Jugador(720, ALTO/2);
+        Escenario escenario = new Escenario(ANCHO, ALTO);
         this.addKeyListener(jugador1);
         this.addKeyListener(jugador2);
         

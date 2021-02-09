@@ -1,14 +1,14 @@
 package Interacciones;
-import Actores.ActEscenario;
+import Actores.Escenario;
 import Principal.Interaccion;
-import Actores.ActJugador;
+import Actores.Jugador;
 
 public class InteJugadorEscenario implements Interaccion{
     
-    private final ActJugador jugador;
-    private final ActEscenario escenario;
+    private final Jugador jugador;
+    private final Escenario escenario;
     
-    public InteJugadorEscenario(ActJugador jugador, ActEscenario escenario){
+    public InteJugadorEscenario(Jugador jugador, Escenario escenario){
         this.jugador = jugador;
         this.escenario = escenario;
     }

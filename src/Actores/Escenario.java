@@ -4,12 +4,12 @@ import Principal.Actor;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class ActEscenario implements Actor {
+public class Escenario implements Actor {
 
     private final int ALTO;
     private final int ANCHO;
     
-    public ActEscenario(int ANCHO, int ALTO){
+    public Escenario(int ANCHO, int ALTO){
         this.ANCHO = ANCHO;
         this.ALTO = ALTO;
     }

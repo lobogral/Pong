@@ -1,17 +1,17 @@
 package Interacciones;
-import Actores.ActEscenario;
+import Actores.Escenario;
 import Principal.Interaccion;
-import Actores.ActJugador;
-import Actores.ActPelota;
+import Actores.Jugador;
+import Actores.Pelota;
 
 public class IntePuntaje implements Interaccion{
     
-    private final ActPelota pelota;
-    private final ActEscenario escenario;
-    private final ActJugador jugador1;
-    private final ActJugador jugador2;
+    private final Pelota pelota;
+    private final Escenario escenario;
+    private final Jugador jugador1;
+    private final Jugador jugador2;
     
-    public IntePuntaje(ActPelota pelota, ActEscenario escenario, ActJugador jugador1, ActJugador jugador2){
+    public IntePuntaje(Pelota pelota, Escenario escenario, Jugador jugador1, Jugador jugador2){
         this.pelota = pelota;
         this.escenario = escenario;
         this.jugador1 = jugador1;
