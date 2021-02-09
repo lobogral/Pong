@@ -1,8 +1,13 @@
+package Actores;
+
+import Principal.Actor;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
-public class Jugador {
+public class ActJugador extends KeyAdapter implements Actor{
     
     private int velY;
     private final int posX;
@@ -11,7 +16,7 @@ public class Jugador {
     private final int ancho;
     private int puntaje;
     
-    public Jugador(int posX, int posY) {
+    public ActJugador(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
         this.alto = 80;
@@ -20,6 +25,7 @@ public class Jugador {
         this.velY = 2;
     }
     
+    @Override
     public void dibujar(Graphics lapiz){
         //Puntaje
         lapiz.setColor(Color.WHITE);
@@ -32,14 +38,6 @@ public class Jugador {
     
     public void actualizar(){
         posY += -velY;
-    }
-    
-    public void bajar(){
-        velY = -2;
-    }
-    
-    public void subir(){
-        velY = 2;
     }
     
     public int getPosX(){
@@ -64,5 +62,18 @@ public class Jugador {
     
     public void aumentarPuntaje(){
         puntaje++;
+    }
+    
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int key = e.getKeyCode();
+        switch (key) {
+            case KeyEvent.VK_UP -> {
+                velY = 2;
+            }
+            case KeyEvent.VK_DOWN -> {
+                velY = -2;
+            }
+        }
     }
 }

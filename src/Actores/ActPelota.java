@@ -1,14 +1,17 @@
+package Actores;
+
+import Principal.Actor;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Pelota {
+public class ActPelota implements Actor {
     private int posX;
     private int posY;
     private int velX;
     private int velY;
     private final int diametro;
 
-    public Pelota(int posX, int posY) {
+    public ActPelota(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
         this.velX = 2;
@@ -16,6 +19,7 @@ public class Pelota {
         this.diametro = 20;
     }
     
+    @Override
     public void dibujar(Graphics lapiz){
         lapiz.setColor(Color.WHITE);
         lapiz.fillOval(posX, posY, diametro, diametro);
