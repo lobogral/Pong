@@ -16,7 +16,7 @@ public class Pelota implements Actor {
         this.posY = posY;
         this.velX = 2;
         this.velY = -2;
-        this.diametro = 20;
+        this.diametro = 14;
     }
     
     @Override

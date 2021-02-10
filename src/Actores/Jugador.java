@@ -20,7 +20,7 @@ public class Jugador extends KeyAdapter implements Actor{
         this.posX = posX;
         this.posY = posY;
         this.alto = 80;
-        this.ancho = 5;
+        this.ancho = 3;
         this.puntaje = 0;
         this.velY = 2;
     }
@@ -29,8 +29,8 @@ public class Jugador extends KeyAdapter implements Actor{
     public void dibujar(Graphics lapiz){
         //Puntaje
         lapiz.setColor(Color.WHITE);
-        lapiz.setFont(new Font("Consolas", Font.PLAIN, 30));
-        lapiz.drawString("" + puntaje, posX - 5, 65);
+        lapiz.setFont(new Font("Courier New", Font.PLAIN, 40));
+        lapiz.drawString("" + puntaje, posX - 10, 68);
         //Paleta
         lapiz.setColor(Color.WHITE);
         lapiz.fillRect(posX, posY, ancho, alto);
