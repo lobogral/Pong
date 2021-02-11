@@ -1,59 +1,21 @@
 package Principal;
 
-import Actores.Escenario;
-import Actores.Pelota;
-import Actores.Jugador;
-import Interacciones.InteJugadorEscenario;
-import Interacciones.IntePelotaEscenario;
-import Interacciones.IntePuntaje;
-import Interacciones.IntePelotaJugador;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 
-public class Pong extends JFrame {
+public class Pong {
 
+    private final JFrame ventana;
     private final Interaccion[] interacciones;
     private final Actor[] actores;
 
-    public static void main(String[] args) {
-        Pong pong = new Pong();
-    }
+    public Pong(JFrame ventana, Actor[] actores, Interaccion[] interacciones) {
 
-    public Pong() {
-        
-        int ANCHO = 800;
-        int ALTO = 600;
-
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(ANCHO, ALTO);
-        this.setResizable(false);
-        this.setLocation(100, 100);
-        this.setVisible(true);
-        this.setTitle("Pong");
-        this.createBufferStrategy(2);
-
-        Pelota pelota = new Pelota(ANCHO/2, ALTO/2);
-        Jugador jugador1 = new Jugador(70, ALTO/2);
-        Jugador jugador2 = new Jugador(720, ALTO/2);
-        Escenario escenario = new Escenario(ANCHO, ALTO);
-        this.addKeyListener(jugador1);
-        this.addKeyListener(jugador2);
-        
-        actores = new Actor[4];
-        actores[0] = escenario;
-        actores[1] = pelota;
-        actores[2] = jugador1;
-        actores[3] = jugador2;
-
-        interacciones = new Interaccion[6];
-        interacciones[0] = new InteJugadorEscenario(jugador1, escenario);
-        interacciones[1] = new InteJugadorEscenario(jugador2, escenario);
-        interacciones[2] = new IntePuntaje(pelota, escenario, jugador1, jugador2);
-        interacciones[3] = new IntePelotaJugador(pelota, jugador1);
-        interacciones[4] = new IntePelotaJugador(pelota, jugador2);
-        interacciones[5] = new IntePelotaEscenario(pelota, escenario);
+        this.ventana = ventana;
+        this.actores = actores;
+        this.interacciones = interacciones;
         
         while (true) {
             this.interactuar();
@@ -71,7 +33,7 @@ public class Pong extends JFrame {
     
     private void dibujar() {
         
-        BufferStrategy buffer = this.getBufferStrategy();
+        BufferStrategy buffer = ventana.getBufferStrategy();
         Graphics lapiz = buffer.getDrawGraphics();
         
         for (Actor actor : actores) {
