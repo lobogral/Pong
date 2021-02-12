@@ -15,14 +15,18 @@ public class Jugador extends KeyAdapter implements Actor{
     private final int alto;
     private final int ancho;
     private int puntaje;
+    private final int keyEventUp;
+    private final int keyEventDown;
     
-    public Jugador(int posX, int posY) {
+    public Jugador(int posX, int posY, int keyEventUp, int keyEventDown) {
         this.posX = posX;
         this.posY = posY;
         this.alto = 80;
         this.ancho = 3;
         this.puntaje = 0;
         this.velY = 2;
+        this.keyEventUp = keyEventUp;
+        this.keyEventDown = keyEventDown;
     }
     
     @Override
@@ -67,13 +71,10 @@ public class Jugador extends KeyAdapter implements Actor{
     @Override
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
-        switch (key) {
-            case KeyEvent.VK_UP -> {
-                velY = 2;
-            }
-            case KeyEvent.VK_DOWN -> {
-                velY = -2;
-            }
+        if(key == keyEventUp){
+            velY = 2;
+        } else if(key == keyEventDown){
+            velY = -2;
         }
     }
 }

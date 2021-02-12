@@ -11,6 +11,7 @@ import Principal.Pong;
 import Principal.Ventana;
 import java.awt.event.KeyListener;
 import javax.swing.JFrame;
+import java.awt.event.KeyEvent;
 
 public class Launcher {
 
@@ -20,8 +21,8 @@ public class Launcher {
         int ALTO = 600;
         
         Pelota pelota = new Pelota(ANCHO/2, ALTO/2);
-        Jugador jugador1 = new Jugador(70, ALTO/2);
-        Jugador jugador2 = new Jugador(720, ALTO/2);
+        Jugador jugador1 = new Jugador(70, ALTO/2, KeyEvent.VK_UP, KeyEvent.VK_DOWN);
+        Jugador jugador2 = new Jugador(720, ALTO/2, KeyEvent.VK_UP, KeyEvent.VK_DOWN);
         Escenario escenario = new Escenario(ANCHO, ALTO);
         
         KeyListener[] keyListeners = new KeyListener[2];
