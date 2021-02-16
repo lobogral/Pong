@@ -1,17 +1,14 @@
 package Principal;
 
 import java.awt.Graphics;
-import java.awt.Toolkit;
-import java.awt.image.BufferStrategy;
-import javax.swing.JFrame;
 
 public class Pong {
 
-    private final JFrame ventana;
+    private final Ventana ventana;
     private final Interaccion[] interacciones;
     private final Actor[] actores;
 
-    public Pong(JFrame ventana, Actor[] actores, Interaccion[] interacciones) {
+    public Pong(Ventana ventana, Actor[] actores, Interaccion[] interacciones) {
 
         this.ventana = ventana;
         this.actores = actores;
@@ -32,18 +29,14 @@ public class Pong {
     }
     
     private void dibujar() {
-        
-        BufferStrategy buffer = ventana.getBufferStrategy();
-        Graphics lapiz = buffer.getDrawGraphics();
+
+        Graphics lapiz = ventana.getLapiz();
         
         for (Actor actor : actores) {
             actor.dibujar(lapiz);
         }
 
-        lapiz.dispose();
-        buffer.show();
-
-        Toolkit.getDefaultToolkit().sync();
+        ventana.dibujar();
     }
 
     private void dormir() {

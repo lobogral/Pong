@@ -15,11 +15,13 @@ public class InteJugadorEscenario implements Interaccion{
     
     @Override
     public void ejecutar(){
-        if (jugador.getPosY() > 100 && jugador.getVelPositiva()) {
+        if (jugador.getPosY() > escenario.getPosY() && jugador.getVelPositiva()) {
             jugador.actualizar();
         }
         
-        if (jugador.getPosY() < escenario.getALTO() - 100 && !jugador.getVelPositiva()) {
+        boolean valor1 = jugador.getPosY() + jugador.getAlto() < escenario.getAlto();
+        boolean valor2 = !jugador.getVelPositiva();
+        if (valor1 && valor2) {
             jugador.actualizar();
         }
     }

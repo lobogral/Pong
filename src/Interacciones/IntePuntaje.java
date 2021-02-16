@@ -24,7 +24,7 @@ public class IntePuntaje implements Interaccion{
             jugador2.aumentarPuntaje();
         }
       
-        if (pelota.getPosX() >= escenario.getANCHO() - 40) {
+        if (pelota.getPosX() >= escenario.getAncho() - pelota.getDiametro()) {
             jugador1.aumentarPuntaje();
         }
         

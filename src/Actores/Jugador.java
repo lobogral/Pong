@@ -34,7 +34,7 @@ public class Jugador extends KeyAdapter implements Actor{
         //Puntaje
         lapiz.setColor(Color.WHITE);
         lapiz.setFont(new Font("Courier New", Font.PLAIN, 40));
-        lapiz.drawString("" + puntaje, posX - 10, 68);
+        lapiz.drawString("" + puntaje, posX - 10, 40);
         //Paleta
         lapiz.setColor(Color.WHITE);
         lapiz.fillRect(posX, posY, ancho, alto);
