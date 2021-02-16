@@ -1,11 +1,12 @@
-package Principal;
+package Actores;
 
+import Principal.Actor;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 
-public class Ventana extends JFrame {
+public class Ventana extends JFrame implements Actor{
 
     private final Image buffer; 
     private final Graphics virtual;
@@ -30,7 +31,8 @@ public class Ventana extends JFrame {
         return virtual;
     }
     
-    public void dibujar(){
+    @Override
+    public void dibujar(Graphics lapiz){
         real.drawImage(buffer, 0, 0, null);
     }
     

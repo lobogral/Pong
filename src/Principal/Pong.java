@@ -4,19 +4,17 @@ import java.awt.Graphics;
 
 public class Pong {
 
-    private final Ventana ventana;
     private final Interaccion[] interacciones;
     private final Actor[] actores;
 
-    public Pong(Ventana ventana, Actor[] actores, Interaccion[] interacciones) {
+    public Pong(Graphics lapiz, Actor[] actores, Interaccion[] interacciones) {
 
-        this.ventana = ventana;
         this.actores = actores;
         this.interacciones = interacciones;
         
         while (true) {
             this.interactuar();
-            this.dibujar();
+            this.dibujar(lapiz);
             this.dormir();
         }
 
@@ -27,16 +25,11 @@ public class Pong {
             interaccion.ejecutar();
         }
     }
-    
-    private void dibujar() {
 
-        Graphics lapiz = ventana.getLapiz();
-        
+    private void dibujar(Graphics lapiz) {
         for (Actor actor : actores) {
             actor.dibujar(lapiz);
         }
-
-        ventana.dibujar();
     }
 
     private void dormir() {

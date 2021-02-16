@@ -37,7 +37,9 @@ public class Escenario implements Actor {
     @Override
     public void dibujar(Graphics lapiz) {
         lapiz.setColor(Color.BLACK);
-        lapiz.fillRect(posX, posY, ancho, alto);
+        lapiz.fillRect(0, 0, ancho, alto);
+        lapiz.setColor(Color.WHITE);
+        lapiz.drawLine(0, posY-1, ancho, posY-1);
     }
 
 }
