@@ -1,6 +1,6 @@
 package Actores;
 
-import Principal.Actor;
+import Interfaces.Actor;
 import java.awt.Color;
 import java.awt.Graphics;
 

@@ -1,5 +1,5 @@
 package Interacciones;
-import Principal.Interaccion;
+import Interfaces.Interaccion;
 import Actores.Jugador;
 import Actores.Pelota;
 

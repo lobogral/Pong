@@ -1,6 +1,6 @@
 package Interacciones;
 import Actores.Escenario;
-import Principal.Interaccion;
+import Interfaces.Interaccion;
 import Actores.Jugador;
 
 public class InteJugadorEscenario implements Interaccion{

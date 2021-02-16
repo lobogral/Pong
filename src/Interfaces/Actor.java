@@ -1,4 +1,4 @@
-package Principal;
+package Interfaces;
 
 import java.awt.Graphics;
 
