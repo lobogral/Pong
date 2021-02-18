@@ -1,45 +1,23 @@
 package Actores;
 
-import Interfaces.Actor;
 import java.awt.Color;
 import java.awt.Graphics;
+import Interfaces.Lienzo;
+import Interfaces.Maniqui;
 
-public class Escenario implements Actor {
+public class Escenario extends Maniqui implements Lienzo {
 
-    private final int posX;
-    private final int posY;
-    private final int alto;
-    private final int ancho;
-    
     public Escenario(int posX, int posY, int ancho, int alto){
-        this.posX = posX;
-        this.posY = posY;
-        this.ancho = ancho;
-        this.alto = alto;
-    }
-    
-    public int getAncho(){
-        return ancho;
-    }
-        
-    public int getAlto(){
-        return alto;
-    }
-    
-    public int getPosX(){
-        return posX;
-    }
-    
-    public int getPosY(){
-        return posY;
+        this.setPos(posX, posY);
+        this.setDimensiones(ancho, alto);
     }
 
     @Override
     public void dibujar(Graphics lapiz) {
         lapiz.setColor(Color.BLACK);
-        lapiz.fillRect(0, 0, ancho, alto);
+        lapiz.fillRect(0, 0, getAncho(), getAlto());
         lapiz.setColor(Color.WHITE);
-        lapiz.drawLine(0, posY-1, ancho, posY-1);
+        lapiz.drawLine(0, getPosY()-1, getAncho(), getPosY()-1);
     }
 
 }

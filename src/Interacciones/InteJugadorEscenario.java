@@ -1,29 +1,28 @@
 package Interacciones;
-import Actores.Escenario;
 import Interfaces.Interaccion;
-import Actores.Jugador;
+import Interfaces.Maniqui;
 
 public class InteJugadorEscenario implements Interaccion{
     
-    private final Jugador jugador;
-    private final Escenario escenario;
+    private final Maniqui jugador;
+    private final Maniqui escenario;
     
-    public InteJugadorEscenario(Jugador jugador, Escenario escenario){
+    public InteJugadorEscenario(Maniqui jugador, Maniqui escenario){
         this.jugador = jugador;
         this.escenario = escenario;
     }
-    
+
     @Override
     public void ejecutar(){
-        if (jugador.getPosY() > escenario.getPosY() && jugador.getVelPositiva()) {
+        if (jugador.getPosY() > escenario.getPosY() && jugador.getVelY()<=0) {
             jugador.actualizar();
         }
         
         boolean valor1 = jugador.getPosY() + jugador.getAlto() < escenario.getAlto();
-        boolean valor2 = !jugador.getVelPositiva();
+        boolean valor2 = jugador.getVelY()>0;
         if (valor1 && valor2) {
             jugador.actualizar();
         }
     }
-    
+
 }

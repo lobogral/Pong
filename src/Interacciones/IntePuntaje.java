@@ -1,17 +1,16 @@
 package Interacciones;
-import Actores.Escenario;
 import Interfaces.Interaccion;
-import Actores.Jugador;
-import Actores.Pelota;
+import Interfaces.Maniqui;
+import Interfaces.Puntaje;
 
 public class IntePuntaje implements Interaccion{
     
-    private final Pelota pelota;
-    private final Escenario escenario;
-    private final Jugador jugador1;
-    private final Jugador jugador2;
+    private final Maniqui pelota;
+    private final Maniqui escenario;
+    private final Puntaje jugador1;
+    private final Puntaje jugador2;
     
-    public IntePuntaje(Pelota pelota, Escenario escenario, Jugador jugador1, Jugador jugador2){
+    public IntePuntaje(Maniqui pelota, Maniqui escenario, Puntaje jugador1, Puntaje jugador2){
         this.pelota = pelota;
         this.escenario = escenario;
         this.jugador1 = jugador1;
@@ -21,11 +20,11 @@ public class IntePuntaje implements Interaccion{
     @Override
     public void ejecutar(){
         if (pelota.getPosX() <= 0) {
-            jugador2.aumentarPuntaje();
+            jugador2.aumentar();
         }
       
-        if (pelota.getPosX() >= escenario.getAncho() - pelota.getDiametro()) {
-            jugador1.aumentarPuntaje();
+        if (pelota.getPosX() >= escenario.getAncho() - pelota.getAncho()) {
+            jugador1.aumentar();
         }
         
     }

@@ -1,29 +1,27 @@
 package Interacciones;
 import Interfaces.Interaccion;
-import Actores.Jugador;
-import Actores.Pelota;
+import Interfaces.Maniqui;
 
 public class IntePelotaJugador implements Interaccion{
-    
-    private final Pelota pelota;
-    private final Jugador jugador;
-    
-    public IntePelotaJugador(Pelota pelota, Jugador jugador){
+
+    private final Maniqui pelota;
+    private final Maniqui jugador;
+
+    public IntePelotaJugador(Maniqui pelota, Maniqui jugador){
         this.pelota = pelota;
         this.jugador = jugador;
     }
-    
+
     @Override
     public void ejecutar(){
         boolean valor1, valor2, valor3, valor4;
-        valor1 = pelota.getPosX() + pelota.getDiametro() > jugador.getPosX();
+        valor1 = pelota.getPosX() + pelota.getAncho()> jugador.getPosX();
         valor2 = pelota.getPosX() < jugador.getPosX() + jugador.getAncho();
-        valor3 = pelota.getPosY() + pelota.getDiametro() > jugador.getPosY();
+        valor3 = pelota.getPosY() + pelota.getAlto()> jugador.getPosY();
         valor4 = pelota.getPosY() < jugador.getPosY() + jugador.getAlto();
         
         if (valor1 && valor2 && valor3 && valor4) {
-            pelota.invertirVelX();
-            pelota.invertirVelY();
+            pelota.setVel(-pelota.getVelX(), -pelota.getVelY());
             /*
              * Doble actualizar permite que la pelota
              * No se pegue a la paleta del jugador
@@ -32,5 +30,5 @@ public class IntePelotaJugador implements Interaccion{
             pelota.actualizar();
         }
     }
-    
+
 }
