@@ -10,6 +10,7 @@ import Interacciones.IntePuntaje;
 import Interfaces.Interaccion;
 import Interfaces.Maniqui;
 import Interfaces.Operacion;
+import Interfaces.Puntaje;
 
 public class Interactuar implements Operacion {
 
@@ -21,11 +22,13 @@ public class Interactuar implements Operacion {
         Maniqui mJugador1 = jugador1;
         Maniqui mJugador2 = jugador2;
         Maniqui mEscenario = escenario;
+        Puntaje pJugador1 = jugador1;
+        Puntaje pJugador2 = jugador2;
         
         interacciones = new Interaccion[6];
         interacciones[0] = new InteJugadorEscenario(mJugador1, mEscenario);
         interacciones[1] = new InteJugadorEscenario(mJugador2, mEscenario);
-        interacciones[2] = new IntePuntaje(mPelota, mEscenario, jugador1, jugador2);
+        interacciones[2] = new IntePuntaje(mPelota, mEscenario, pJugador1, pJugador2);
         interacciones[3] = new IntePelotaJugador(mPelota, mJugador1);
         interacciones[4] = new IntePelotaJugador(mPelota, mJugador2);
         interacciones[5] = new IntePelotaEscenario(mPelota, mEscenario);

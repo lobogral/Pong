@@ -1,5 +1,8 @@
 package Operaciones;
 
+import Actores.Escenario;
+import Actores.Jugador;
+import Actores.Pelota;
 import Interfaces.Operacion;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -11,11 +14,11 @@ public class Dibujar implements Operacion {
     private final Image buffer; 
     private final Graphics lapizVirtual;
     private final Graphics lapizReal;
-    private final Lienzo[] actores;
+    private final Lienzo[] lienzos;
     
-    public Dibujar(Graphics lapiz, Lienzo[] actores) {
+    public Dibujar(Graphics lapiz, Escenario escenario, Pelota pelota, Jugador[] jugadores) {
         
-        this.actores = actores;
+        this.lienzos = new Lienzo[]{escenario, pelota, jugadores[0], jugadores[1]};
         
         buffer = new BufferedImage(800, 600, BufferedImage.TYPE_INT_ARGB);
         lapizVirtual = buffer.getGraphics();
@@ -25,8 +28,8 @@ public class Dibujar implements Operacion {
 
     @Override
     public void realizar() {
-        for (Lienzo actor : actores) {
-            actor.dibujar(lapizVirtual);
+        for (Lienzo lienzo : lienzos) {
+            lienzo.dibujar(lapizVirtual);
         }
         lapizReal.drawImage(buffer, 0, 0, null);
     }

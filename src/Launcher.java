@@ -6,7 +6,6 @@ import Operaciones.Dibujar;
 import Operaciones.Dormir;
 import Operaciones.Interactuar;
 import java.awt.event.KeyEvent;
-import Interfaces.Lienzo;
 
 public class Launcher {
 
@@ -23,15 +22,11 @@ public class Launcher {
 
         ventana.addKeyListener(jugador1);
         ventana.addKeyListener(jugador2);
-
-        Lienzo[] actores = new Lienzo[4];
-        actores[0] = escenario;
-        actores[1] = pelota;
-        actores[2] = jugador1;
-        actores[3] = jugador2;
+        
+        Jugador[] jugadores = {jugador1, jugador2};
 
         Operacion[] operaciones = new Operacion[3];
-        operaciones[0] = new Dibujar(ventana.getLapiz(), actores);
+        operaciones[0] = new Dibujar(ventana.getLapiz(), escenario, pelota, jugadores);
         operaciones[1] = new Interactuar(escenario, pelota, jugador1, jugador2);
         operaciones[2] = new Dormir();
 
