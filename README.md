@@ -1,4 +1,4 @@
-# Raqueta
+# Pong
 El juego contiene una pelota y dos jugadores, si un jugador logra meter la pelota en el lado opuesto, su puntaje sube.
 
 <img src="assets/ImgPrincipal.png"/>
