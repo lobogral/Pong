@@ -29,7 +29,7 @@ public class Launcher {
         Lienzo[] lienzos = {complemento, escenario, pelota, jugador1, jugador2};
 
         Operacion[] operaciones = new Operacion[3];
-        operaciones[0] = new Dibujar(ventana.getLapiz(), lienzos);
+        operaciones[0] = new Dibujar(anchoJuego, altoJuego, ventana.getLapiz(), lienzos);
         operaciones[1] = new Interactuar(escenario, pelota, jugador1, jugador2);
         operaciones[2] = new Dormir();
 

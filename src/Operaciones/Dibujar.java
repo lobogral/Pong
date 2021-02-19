@@ -13,11 +13,11 @@ public class Dibujar implements Operacion {
     private final Graphics lapizReal;
     private final Lienzo[] lienzos;
     
-    public Dibujar(Graphics lapiz, Lienzo[] lienzos) {
+    public Dibujar(int ancho, int alto, Graphics lapiz, Lienzo[] lienzos) {
         
         this.lienzos = lienzos;
         
-        buffer = new BufferedImage(800, 600, BufferedImage.TYPE_INT_ARGB);
+        buffer = new BufferedImage(ancho, alto, BufferedImage.TYPE_INT_ARGB);
         lapizVirtual = buffer.getGraphics();
         lapizReal = lapiz;
 
