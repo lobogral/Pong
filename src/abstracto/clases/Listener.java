@@ -1,27 +1,22 @@
 package abstracto.clases;
 
+import abstracto.interfaces.ListenerEsp;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class Listener extends KeyAdapter {
     
-    private final int keyEventUp;
-    private final int keyEventDown;
-    private final Maniqui maniqui;
+    private final ListenerEsp[] listenersEsp;
 
-    public Listener(Maniqui maniqui, int keyEventUp, int keyEventDown){
-        this.maniqui = maniqui;
-        this.keyEventUp = keyEventUp;
-        this.keyEventDown = keyEventDown;
+    public Listener(ListenerEsp[] listenersEsp){
+        this.listenersEsp = listenersEsp;
     }
     
     @Override
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
-        if(key == keyEventUp){
-            maniqui.setVel(0, -2);
-        } else if(key == keyEventDown){
-            maniqui.setVel(0, 2);
+        for (ListenerEsp listenerEsp : listenersEsp) {
+            listenerEsp.ejecutar(key);
         }
     }
     

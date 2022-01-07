@@ -3,6 +3,7 @@ import abstracto.clases.Ventana;
 import abstracto.clases.Pong;
 import abstracto.interfaces.Interaccion;
 import abstracto.interfaces.Lienzo;
+import abstracto.interfaces.ListenerEsp;
 import abstracto.interfaces.Operacion;
 import concreto.actores.Complemento;
 import concreto.actores.Escenario;
@@ -26,13 +27,13 @@ public class Launcher {
         int altoJuego = ventana.getAltoJuego();
 
         Pelota pelota = new Pelota(anchoJuego/2, altoJuego/2);
-        Jugador jugador1 = new Jugador(70, altoJuego/2);
-        Jugador jugador2 = new Jugador(720, altoJuego/2);
+        Jugador jugador1 = new Jugador(70, altoJuego/2, KeyEvent.VK_W, KeyEvent.VK_S);
+        Jugador jugador2 = new Jugador(720, altoJuego/2, KeyEvent.VK_I, KeyEvent.VK_K);
         Escenario escenario = new Escenario(0, 57, anchoJuego, altoJuego);
         Complemento complemento = new Complemento(0, 0, anchoJuego, 57);
 
-        ventana.addKeyListener(new Listener(jugador1, KeyEvent.VK_W, KeyEvent.VK_S));
-        ventana.addKeyListener(new Listener(jugador2, KeyEvent.VK_I, KeyEvent.VK_K));
+        ListenerEsp[] listenersEsp = {jugador1, jugador2};
+        ventana.addKeyListener(new Listener(listenersEsp));
 
         Lienzo[] lienzos = {complemento, escenario, pelota, jugador1, jugador2};
         int cont;
