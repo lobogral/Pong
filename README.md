@@ -1,5 +1,8 @@
 # Pong
-El juego contiene una pelota y dos jugadores, si un jugador logra meter la pelota en el lado opuesto, su puntaje sube.
+
+Una implementación de Java sobre el clásico juego Pong.
+
+El juego contiene una pelota y dos jugadores, si un jugador logra meter la pelota en el lado opuesto, su puntaje sube, el juego transcurre de manera indefinida.
 
 <img src="assets/ImgPrincipal.png"/>
 
