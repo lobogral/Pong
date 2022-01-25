@@ -1,23 +1,21 @@
 package abstracto.clases;
 
-import abstracto.interfaces.ListenerEsp;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
 
 public class Listener extends KeyAdapter {
     
-    private final ListenerEsp[] listenersEsp;
-
-    public Listener(ListenerEsp[] listenersEsp){
-        this.listenersEsp = listenersEsp;
+    private final HashMap<Integer, ActualizacionJugador> actualizacionesJugador;
+    
+    public Listener(HashMap<Integer, ActualizacionJugador> actualizacionesJugador){
+        this.actualizacionesJugador = actualizacionesJugador;
     }
     
     @Override
     public void keyPressed(KeyEvent e) {
-        int key = e.getKeyCode();
-        for (ListenerEsp listenerEsp : listenersEsp) {
-            listenerEsp.ejecutar(key);
-        }
+        ActualizacionJugador actualizacionJugador = actualizacionesJugador.get(e.getKeyCode());
+        if (actualizacionJugador != null) actualizacionJugador.ejecutar();
     }
     
 }
