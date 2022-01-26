@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import abstracto.interfaces.Lienzo;
 import abstracto.clases.Maniqui;
 
-public class Escenario extends Maniqui implements Lienzo {
+public final class Escenario extends Maniqui implements Lienzo {
 
     public Escenario(int posX, int posY, int ancho, int alto){
         this.setPos(posX, posY);

@@ -3,14 +3,14 @@ import abstracto.interfaces.Interaccion;
 import abstracto.clases.Maniqui;
 import abstracto.interfaces.Puntaje;
 
-public class IntePuntaje implements Interaccion{
+public final class InteReiniciar implements Interaccion{
     
     private final Maniqui pelota;
     private final Maniqui escenario;
     private final Puntaje puntajeJugador1;
     private final Puntaje puntajeJugador2;
     
-    public IntePuntaje(Maniqui pelota, Maniqui escenario, Puntaje jugador1, Puntaje jugador2){
+    public InteReiniciar(Maniqui pelota, Maniqui escenario, Puntaje jugador1, Puntaje jugador2){
         this.pelota = pelota;
         this.escenario = escenario;
         this.puntajeJugador1 = jugador1;
@@ -19,12 +19,19 @@ public class IntePuntaje implements Interaccion{
     
     @Override
     public void ejecutar(){
+        
         if (pelota.getPosX() <= 0) {
             puntajeJugador2.aumentar();
         }
       
         if (pelota.getPosX() >= escenario.getAncho() - pelota.getAncho()) {
             puntajeJugador1.aumentar();
+        }
+        
+        boolean valor1 = pelota.getPosX() <= 0;
+        boolean valor2 = pelota.getPosX() >= escenario.getAncho() - pelota.getAncho();
+        if (valor1 || valor2) {
+            pelota.setPos(escenario.getAncho()/2, escenario.getAlto()/2);
         }
         
     }

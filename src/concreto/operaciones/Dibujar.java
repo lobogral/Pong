@@ -6,7 +6,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import abstracto.interfaces.Lienzo;
 
-public class Dibujar implements Operacion {
+public final class Dibujar implements Operacion {
 
     private final Image buffer; 
     private final Graphics lapizVirtual;

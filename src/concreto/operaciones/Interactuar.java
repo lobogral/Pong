@@ -3,7 +3,7 @@ package concreto.operaciones;
 import abstracto.interfaces.Interaccion;
 import abstracto.interfaces.Operacion;
 
-public class Interactuar implements Operacion {
+public final class Interactuar implements Operacion {
 
     private final Interaccion[] interacciones;
     
