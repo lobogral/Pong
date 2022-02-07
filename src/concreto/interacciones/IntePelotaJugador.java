@@ -1,13 +1,13 @@
 package concreto.interacciones;
 import abstracto.interfaces.Interaccion;
-import abstracto.clases.Maniqui;
+import abstracto.maniqui.ManiquiMov;
 
 public final class IntePelotaJugador implements Interaccion{
 
-    private final Maniqui pelota;
-    private final Maniqui jugador;
+    private final ManiquiMov pelota;
+    private final ManiquiMov jugador;
 
-    public IntePelotaJugador(Maniqui pelota, Maniqui jugador){
+    public IntePelotaJugador(ManiquiMov pelota, ManiquiMov jugador){
         this.pelota = pelota;
         this.jugador = jugador;
     }

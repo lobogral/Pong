@@ -3,9 +3,9 @@ package concreto.actores;
 import java.awt.Color;
 import java.awt.Graphics;
 import abstracto.interfaces.Lienzo;
-import abstracto.clases.Maniqui;
+import abstracto.maniqui.ManiquiMov;
 
-public final class Pelota extends Maniqui implements Lienzo {
+public final class Pelota extends ManiquiMov implements Lienzo {
 
     public Pelota(int posX, int posY) {
         this.setPos(posX, posY);

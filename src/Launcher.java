@@ -11,6 +11,7 @@ import concreto.actores.Complemento;
 import concreto.actores.Escenario;
 import concreto.actores.Jugador;
 import concreto.actores.Pelota;
+import concreto.interacciones.InteJugador;
 import concreto.interacciones.IntePelotaEscenario;
 import concreto.interacciones.IntePelotaJugador;
 import concreto.interacciones.InteReiniciar;
@@ -35,10 +36,10 @@ public class Launcher {
         Complemento complemento = new Complemento(0, 0, anchoJuego, 60);
 
         HashMap<Integer, ActJugador> actsJugador = new HashMap<>();
-        actsJugador.put(KeyEvent.VK_W, new ActJugArriba(pelota, jugador1, escenario));
-        actsJugador.put(KeyEvent.VK_S, new ActJugAbajo(pelota, jugador1, escenario));
-        actsJugador.put(KeyEvent.VK_I, new ActJugArriba(pelota, jugador2, escenario));
-        actsJugador.put(KeyEvent.VK_K, new ActJugAbajo(pelota, jugador2, escenario));
+        actsJugador.put(KeyEvent.VK_W, new ActJugArriba(jugador1));
+        actsJugador.put(KeyEvent.VK_S, new ActJugAbajo(jugador1));
+        actsJugador.put(KeyEvent.VK_I, new ActJugArriba(jugador2));
+        actsJugador.put(KeyEvent.VK_K, new ActJugAbajo(jugador2));
                 
         ventana.addKeyListener(new Listener(actsJugador));
 
@@ -46,7 +47,9 @@ public class Launcher {
         int cont;
         
         cont = 0;
-        Interaccion[] interacciones = new Interaccion[4];        
+        Interaccion[] interacciones = new Interaccion[6];
+        interacciones[cont++] = new InteJugador(pelota, escenario, jugador1);
+        interacciones[cont++] = new InteJugador(pelota, escenario, jugador2);
         interacciones[cont++] = new InteReiniciar(pelota, escenario, jugador1, jugador2);
         interacciones[cont++] = new IntePelotaJugador(pelota, jugador1);
         interacciones[cont++] = new IntePelotaJugador(pelota, jugador2);

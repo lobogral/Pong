@@ -1,16 +1,16 @@
 package concreto.interacciones;
 import abstracto.interfaces.Interaccion;
-import abstracto.clases.Maniqui;
 import abstracto.interfaces.Puntaje;
+import abstracto.maniqui.ManiquiEst;
 
 public final class InteReiniciar implements Interaccion{
     
-    private final Maniqui pelota;
-    private final Maniqui escenario;
+    private final ManiquiEst pelota;
+    private final ManiquiEst escenario;
     private final Puntaje puntajeJugador1;
     private final Puntaje puntajeJugador2;
     
-    public InteReiniciar(Maniqui pelota, Maniqui escenario, Puntaje jugador1, Puntaje jugador2){
+    public InteReiniciar(ManiquiEst pelota, ManiquiEst escenario, Puntaje jugador1, Puntaje jugador2){
         this.pelota = pelota;
         this.escenario = escenario;
         this.puntajeJugador1 = jugador1;

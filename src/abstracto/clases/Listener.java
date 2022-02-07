@@ -16,7 +16,13 @@ public class Listener extends KeyAdapter {
     @Override
     public void keyPressed(KeyEvent e) {
         ActJugador actJugador = actsJugador.get(e.getKeyCode());
-        if (actJugador != null) actJugador.ejecutar();
+        if (actJugador != null) actJugador.presionar();
+    }
+    
+    @Override
+    public void keyReleased(KeyEvent e) {
+        ActJugador actJugador = actsJugador.get(e.getKeyCode());
+        if (actJugador != null) actJugador.soltar();
     }
     
 }

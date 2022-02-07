@@ -1,5 +1,6 @@
 package abstracto.interfaces;
 
 public interface ActJugador {
-    public void ejecutar();
+    public void presionar();
+    public void soltar();
 }
