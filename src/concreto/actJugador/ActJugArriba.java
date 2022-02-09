@@ -2,7 +2,6 @@ package concreto.actJugador;
 
 import abstracto.interfaces.ActJugador;
 import abstracto.maniqui.ManiquiOpcionMov;
-import concreto.actores.Jugador;
 
 public final class ActJugArriba implements ActJugador{
     

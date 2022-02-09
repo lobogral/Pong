@@ -11,9 +11,10 @@ import concreto.actores.Complemento;
 import concreto.actores.Escenario;
 import concreto.actores.Jugador;
 import concreto.actores.Pelota;
-import concreto.interacciones.InteJugador;
-import concreto.interacciones.IntePelotaEscenario;
-import concreto.interacciones.IntePelotaJugador;
+import concreto.interacciones.InteDirPelotaEscenario;
+import concreto.interacciones.InteJugadorActualizar;
+import concreto.interacciones.InteDirPelotaJugador;
+import concreto.interacciones.IntePelotaActualizar;
 import concreto.interacciones.InteReiniciar;
 import concreto.operaciones.Dibujar;
 import concreto.operaciones.Dormir;
@@ -47,13 +48,14 @@ public class Launcher {
         int cont;
         
         cont = 0;
-        Interaccion[] interacciones = new Interaccion[6];
-        interacciones[cont++] = new InteJugador(pelota, escenario, jugador1);
-        interacciones[cont++] = new InteJugador(pelota, escenario, jugador2);
+        Interaccion[] interacciones = new Interaccion[7];
+        interacciones[cont++] = new InteJugadorActualizar(pelota, escenario, jugador1);
+        interacciones[cont++] = new InteJugadorActualizar(pelota, escenario, jugador2);
         interacciones[cont++] = new InteReiniciar(pelota, escenario, jugador1, jugador2);
-        interacciones[cont++] = new IntePelotaJugador(pelota, jugador1);
-        interacciones[cont++] = new IntePelotaJugador(pelota, jugador2);
-        interacciones[cont++] = new IntePelotaEscenario(pelota, escenario);
+        interacciones[cont++] = new InteDirPelotaJugador(pelota, jugador1);
+        interacciones[cont++] = new InteDirPelotaJugador(pelota, jugador2);
+        interacciones[cont++] = new InteDirPelotaEscenario(pelota, escenario);
+        interacciones[cont++] = new IntePelotaActualizar(pelota);
         
         cont = 0;
         Operacion[] operaciones = new Operacion[3];

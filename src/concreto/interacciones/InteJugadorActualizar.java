@@ -4,14 +4,14 @@ import abstracto.maniqui.ManiquiEst;
 import abstracto.maniqui.ManiquiMov;
 import abstracto.maniqui.ManiquiOpcionMov;
 
-public final class InteJugador implements Interaccion{
+public final class InteJugadorActualizar implements Interaccion{
     
     private final ManiquiMov pelota;
     private final ManiquiEst escenario;
     private final ManiquiOpcionMov jugador;
     private final ManiquiMov jugadorFut;
     
-    public InteJugador(ManiquiMov pelota, ManiquiEst escenario, ManiquiOpcionMov jugador){
+    public InteJugadorActualizar(ManiquiMov pelota, ManiquiEst escenario, ManiquiOpcionMov jugador){
         this.pelota = pelota;
         this.escenario = escenario;
         this.jugador = jugador;
@@ -36,19 +36,19 @@ public final class InteJugador implements Interaccion{
              */        
 
             // Revisa si el jugador no se intersecta con la pelota
-            boolean interP = false;
-            interP |= pelota.getPosX() + pelota.getAncho() < jugadorFut.getPosX();
-            interP |= pelota.getPosX() > jugadorFut.getPosX() + jugadorFut.getAncho();
-            interP |= pelota.getPosY() + pelota.getAlto() < jugadorFut.getPosY();
-            interP |= pelota.getPosY() > jugadorFut.getPosY() + jugadorFut.getAlto();
+            boolean interP = true;
+            interP &= pelota.getPosX() + pelota.getAncho() > jugadorFut.getPosX();
+            interP &= pelota.getPosX() < jugadorFut.getPosX() + jugadorFut.getAncho();
+            interP &= pelota.getPosY() + pelota.getAlto() > jugadorFut.getPosY();
+            interP &= pelota.getPosY() < jugadorFut.getPosY() + jugadorFut.getAlto();
 
             // Revisa si el jugador está dentro del escenario (coordenadas verticales)
-            boolean interE = true;
-            interE &= jugadorFut.getPosY() + jugadorFut.getAlto() < escenario.getAlto();
-            interE &= jugadorFut.getPosY() > escenario.getPosY();
-            
+            boolean interE = false;
+            interE |= jugadorFut.getPosY() + jugadorFut.getAlto() > escenario.getAlto();
+            interE |= jugadorFut.getPosY() < escenario.getPosY();
+        
             // Si el clon no choca con nada tiene permiso de actualizar
-            if(interP && interE){
+            if(!interP && !interE){
                 jugador.actualizar();
             }    
         }
