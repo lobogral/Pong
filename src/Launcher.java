@@ -2,7 +2,6 @@ import abstracto.clases.Listener;
 import abstracto.clases.Ventana;
 import abstracto.clases.Pong;
 import abstracto.interfaces.ActJugador;
-import abstracto.interfaces.Interaccion;
 import abstracto.interfaces.Lienzo;
 import abstracto.interfaces.Operacion;
 import concreto.actJugador.ActJugArriba;
@@ -11,16 +10,17 @@ import concreto.actores.Complemento;
 import concreto.actores.Escenario;
 import concreto.actores.Jugador;
 import concreto.actores.Pelota;
-import concreto.interacciones.InteDirPelotaEscenario;
-import concreto.interacciones.InteJugadorActualizar;
-import concreto.interacciones.InteDirPelotaJugador;
-import concreto.interacciones.IntePelotaActualizar;
-import concreto.interacciones.InteReiniciar;
+import concreto.cambios.CambVelPelotaPorEscenario;
+import concreto.cambios.CambPosJugador;
+import concreto.cambios.CambVelPelotaPorJugador;
+import concreto.cambios.CambPosPelota;
+import concreto.cambios.CambReiniciar;
 import concreto.operaciones.Dibujar;
 import concreto.operaciones.Dormir;
-import concreto.operaciones.Interactuar;
+import concreto.operaciones.Cambiar;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
+import abstracto.interfaces.Cambio;
 
 public class Launcher {
 
@@ -48,19 +48,19 @@ public class Launcher {
         int cont;
         
         cont = 0;
-        Interaccion[] interacciones = new Interaccion[7];
-        interacciones[cont++] = new InteJugadorActualizar(pelota, escenario, jugador1);
-        interacciones[cont++] = new InteJugadorActualizar(pelota, escenario, jugador2);
-        interacciones[cont++] = new InteReiniciar(pelota, escenario, jugador1, jugador2);
-        interacciones[cont++] = new InteDirPelotaJugador(pelota, jugador1);
-        interacciones[cont++] = new InteDirPelotaJugador(pelota, jugador2);
-        interacciones[cont++] = new InteDirPelotaEscenario(pelota, escenario);
-        interacciones[cont++] = new IntePelotaActualizar(pelota);
+        Cambio[] cambios = new Cambio[7];
+        cambios[cont++] = new CambPosJugador(pelota, escenario, jugador1);
+        cambios[cont++] = new CambPosJugador(pelota, escenario, jugador2);
+        cambios[cont++] = new CambReiniciar(pelota, escenario, jugador1, jugador2);
+        cambios[cont++] = new CambVelPelotaPorJugador(pelota, jugador1);
+        cambios[cont++] = new CambVelPelotaPorJugador(pelota, jugador2);
+        cambios[cont++] = new CambVelPelotaPorEscenario(pelota, escenario);
+        cambios[cont++] = new CambPosPelota(pelota);
         
         cont = 0;
         Operacion[] operaciones = new Operacion[3];
         operaciones[cont++] = new Dibujar(anchoJuego, altoJuego, ventana.getLapiz(), lienzos);
-        operaciones[cont++] = new Interactuar(interacciones);
+        operaciones[cont++] = new Cambiar(cambios);
         operaciones[cont++] = new Dormir();
         
         Pong pong = new Pong(operaciones);

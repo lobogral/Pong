@@ -1,5 +1,5 @@
 package abstracto.interfaces;
 
-public interface Interaccion {
+public interface Cambio {
     public void ejecutar();
 }

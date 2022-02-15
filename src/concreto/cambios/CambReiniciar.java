@@ -1,16 +1,16 @@
-package concreto.interacciones;
-import abstracto.interfaces.Interaccion;
+package concreto.cambios;
 import abstracto.interfaces.Puntaje;
 import abstracto.maniqui.ManiquiEst;
+import abstracto.interfaces.Cambio;
 
-public final class InteReiniciar implements Interaccion{
+public final class CambReiniciar implements Cambio{
     
     private final ManiquiEst pelota;
     private final ManiquiEst escenario;
     private final Puntaje puntajeJugador1;
     private final Puntaje puntajeJugador2;
     
-    public InteReiniciar(ManiquiEst pelota, ManiquiEst escenario, Puntaje jugador1, Puntaje jugador2){
+    public CambReiniciar(ManiquiEst pelota, ManiquiEst escenario, Puntaje jugador1, Puntaje jugador2){
         this.pelota = pelota;
         this.escenario = escenario;
         this.puntajeJugador1 = jugador1;

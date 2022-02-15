@@ -1,17 +1,17 @@
-package concreto.interacciones;
-import abstracto.interfaces.Interaccion;
+package concreto.cambios;
 import abstracto.maniqui.ManiquiEst;
 import abstracto.maniqui.ManiquiMov;
 import abstracto.maniqui.ManiquiOpcionMov;
+import abstracto.interfaces.Cambio;
 
-public final class InteJugadorActualizar implements Interaccion{
+public final class CambPosJugador implements Cambio{
     
     private final ManiquiMov pelota;
     private final ManiquiEst escenario;
     private final ManiquiOpcionMov jugador;
     private final ManiquiMov jugadorFut;
     
-    public InteJugadorActualizar(ManiquiMov pelota, ManiquiEst escenario, ManiquiOpcionMov jugador){
+    public CambPosJugador(ManiquiMov pelota, ManiquiEst escenario, ManiquiOpcionMov jugador){
         this.pelota = pelota;
         this.escenario = escenario;
         this.jugador = jugador;
@@ -42,7 +42,7 @@ public final class InteJugadorActualizar implements Interaccion{
             interP &= pelota.getPosY() + pelota.getAlto() > jugadorFut.getPosY();
             interP &= pelota.getPosY() < jugadorFut.getPosY() + jugadorFut.getAlto();
 
-            // Revisa si el jugador está dentro del escenario (coordenadas verticales)
+            // Revisa si el jugador no está dentro del escenario (coordenadas verticales)
             boolean interE = false;
             interE |= jugadorFut.getPosY() + jugadorFut.getAlto() > escenario.getAlto();
             interE |= jugadorFut.getPosY() < escenario.getPosY();
